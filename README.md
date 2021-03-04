@@ -2,4 +2,4 @@
 
 ##### Sell your secondhand here!
 
-###### Create using React Native
+###### Created using React Native
