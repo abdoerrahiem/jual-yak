@@ -53,5 +53,3 @@ const styles = StyleSheet.create({
 })
 
 export default ImageView
-
-// section 4 ends

@@ -20,8 +20,8 @@ const Product = () => {
         <View style={styles.userContainer}>
           <ListItem
             image={require('../assets/img/abdoerrahiem.jpg')}
-            name="Abdur Rahim"
-            productCount={10}
+            title="Abdur Rahim"
+            subtitle="10 produk"
           />
         </View>
       </View>
