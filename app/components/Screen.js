@@ -10,9 +10,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#fff',
   },
 })
 
 export default Screen
-
-// Section 5 ends

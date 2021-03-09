@@ -1,21 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, Text} from 'react-native'
 import Card from '../components/Card'
 import Screen from '../components/Screen'
 import Icon from '../components/Icon'
 import colors from '../utils/colors'
 import ListItem from '../components/ListItem'
+import Input from '../components/Input'
+import Picker from '../components/Picker'
+
+const categories = [
+  {label: 'Furniture', value: 1},
+  {label: 'Clothing', value: 2},
+  {label: 'Cameras', value: 3},
+]
 
 const Test = () => {
+  const [category, setCategory] = useState(categories[0])
+
   return (
     <Screen>
-      <ListItem
-        title="My Title"
-        // subtitle="My subtitle"
-        ImageComponent={<Icon name="email" />}
+      <Picker
+        selectedItem={category}
+        onSelectItem={(item) => setCategory(item)}
+        icon="apps"
+        placeholder="Category"
+        items={categories}
       />
+      <Input icon="email" placeholder="Username" />
     </Screen>
   )
 }
 
 export default Test
+
+// ends of section 6

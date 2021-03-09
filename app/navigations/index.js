@@ -18,7 +18,7 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Products"
+        initialRouteName="Test"
         screenOptions={{
           animationEnabled: false,
           headerShown: false,
