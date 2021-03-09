@@ -10,6 +10,8 @@ import Product from '../screens/Product'
 import Messages from '../screens/Messages'
 import Account from '../screens/Account'
 import Products from '../screens/Products'
+import ProductEdit from '../screens/ProductEdit'
+import Login from '../screens/Login'
 import Test from '../screens/Test'
 
 const Stack = createStackNavigator()
@@ -18,7 +20,7 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Test"
+        initialRouteName="ProductEdit"
         screenOptions={{
           animationEnabled: false,
           headerShown: false,
@@ -35,6 +37,8 @@ export default () => {
         <Stack.Screen name="Messages" component={Messages} />
         <Stack.Screen name="Account" component={Account} />
         <Stack.Screen name="Products" component={Products} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="ProductEdit" component={ProductEdit} />
         <Stack.Screen name="Test" component={Test} />
       </Stack.Navigator>
     </NavigationContainer>

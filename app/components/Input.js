@@ -31,9 +31,15 @@ const Input = ({icon, ...otherProps}) => {
       {icon && (
         <Icon name={icon} size={24} color={colors.medium} style={styles.icon} />
       )}
-      <TextInput style={styles.textInput} {...otherProps} />
+      <TextInput
+        placeholderTextColor={colors.medium}
+        style={styles.textInput}
+        {...otherProps}
+      />
     </View>
   )
 }
 
 export default Input
+
+// ends of section 7

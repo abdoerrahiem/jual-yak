@@ -31,6 +31,13 @@ const styles = StyleSheet.create({
     color: colors.dark,
     width: '100%',
   },
+  placeholder: {
+    flex: 1,
+    fontSize: 18,
+    fontFamily: 'Quicksand-Light',
+    color: colors.medium,
+    width: '100%',
+  },
   icon: {
     marginRight: 10,
   },
@@ -51,9 +58,11 @@ const Picker = ({icon, placeholder, items, selectedItem, onSelectItem}) => {
               style={styles.icon}
             />
           )}
-          <DefaultText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </DefaultText>
+          {selectedItem ? (
+            <DefaultText style={styles.text}>{selectedItem.label}</DefaultText>
+          ) : (
+            <DefaultText style={styles.placeholder}>{placeholder}</DefaultText>
+          )}
           <Icon name="chevron-down" size={24} color={colors.medium} />
         </View>
       </TouchableWithoutFeedback>
