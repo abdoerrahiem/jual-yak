@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 50,
     flexDirection: 'row',
-    width: '100%',
     paddingVertical: 15,
     paddingHorizontal: 20,
     marginVertical: 10,
@@ -43,13 +42,22 @@ const styles = StyleSheet.create({
   },
 })
 
-const Picker = ({icon, placeholder, items, selectedItem, onSelectItem}) => {
+const Picker = ({
+  icon,
+  placeholder,
+  items,
+  selectedItem,
+  onSelectItem,
+  width = '100%',
+  PickerItemComponent = PickerItem,
+  numberOfColumns = 1,
+}) => {
   const [showModal, setShowModal] = useState(false)
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, {width}]}>
           {icon && (
             <Icon
               name={icon}
@@ -70,11 +78,12 @@ const Picker = ({icon, placeholder, items, selectedItem, onSelectItem}) => {
         <Screen>
           <Button title="Close" onPress={() => setShowModal(false)} />
           <FlatList
+            numColumns={numberOfColumns}
             data={items}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({item}) => (
-              <PickerItem
-                label={item.label}
+              <PickerItemComponent
+                item={item}
                 onPress={() => {
                   setShowModal(false)
                   onSelectItem(item)

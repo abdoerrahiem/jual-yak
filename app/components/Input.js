@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     flexDirection: 'row',
     width: '100%',
-    paddingVertical: 5,
     paddingHorizontal: 20,
     marginVertical: 10,
     alignItems: 'center',
@@ -25,9 +24,9 @@ const styles = StyleSheet.create({
   },
 })
 
-const Input = ({icon, ...otherProps}) => {
+const Input = ({icon, width = '100%', ...otherProps}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {width}]}>
       {icon && (
         <Icon name={icon} size={24} color={colors.medium} style={styles.icon} />
       )}
@@ -41,5 +40,3 @@ const Input = ({icon, ...otherProps}) => {
 }
 
 export default Input
-
-// ends of section 7

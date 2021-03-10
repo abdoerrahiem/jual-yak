@@ -2,8 +2,8 @@ import React from 'react'
 import {Image, StyleSheet} from 'react-native'
 import * as Yup from 'yup'
 import Screen from '../components/Screen'
-import {Form, FormField, SubmitButton} from '../components/forms'
-import Picker from '../components/Picker'
+import {Form, FormField, FormPicker, SubmitButton} from '../components/forms'
+import CategoryPickerItem from '../components/CategoryPickerItem'
 
 const styles = StyleSheet.create({
   logo: {
@@ -26,9 +26,60 @@ const validationSchema = Yup.object().shape({
 })
 
 const categories = [
-  {label: 'Furnitur', value: 1},
-  {label: 'Pakaian', value: 2},
-  {label: 'Kamera', value: 3},
+  {
+    backgroundColor: '#fc5c65',
+    icon: 'floor-lamp',
+    label: 'Furnitur',
+    value: 1,
+  },
+  {
+    backgroundColor: '#fd9644',
+    icon: 'car',
+    label: 'Mobil',
+    value: 2,
+  },
+  {
+    backgroundColor: '#fed330',
+    icon: 'camera',
+    label: 'Kamera',
+    value: 3,
+  },
+  {
+    backgroundColor: '#26de81',
+    icon: 'cards',
+    label: 'Game',
+    value: 4,
+  },
+  {
+    backgroundColor: '#2bcbba',
+    icon: 'shoe-heel',
+    label: 'Pakaian',
+    value: 5,
+  },
+  {
+    backgroundColor: '#45aaf2',
+    icon: 'basketball',
+    label: 'Olahraga',
+    value: 6,
+  },
+  {
+    backgroundColor: '#4b7bec',
+    icon: 'headphones',
+    label: 'Film & Musik',
+    value: 7,
+  },
+  {
+    backgroundColor: '#a55eea',
+    icon: 'book-open-variant',
+    label: 'Buku',
+    value: 8,
+  },
+  {
+    backgroundColor: '#778ca3',
+    icon: 'application',
+    label: 'Lainnya',
+    value: 9,
+  },
 ]
 
 const ProductEdit = () => {
@@ -49,8 +100,16 @@ const ProductEdit = () => {
           //   maxLength={8}
           placeholder="Harga"
           keyboardType="numeric"
+          width={150}
         />
-        <Picker items={categories} name="category" placeholder="Kategori" />
+        <FormPicker
+          numberOfColumns={3}
+          items={categories}
+          name="category"
+          placeholder="Kategori"
+          width="50%"
+          PickerItemComponent={CategoryPickerItem}
+        />
         <FormField
           name="description"
           maxLength={255}
@@ -58,7 +117,6 @@ const ProductEdit = () => {
           multiline
           numberOfLines={5}
         />
-
         <SubmitButton title="Post" />
       </Form>
     </Screen>

@@ -2,7 +2,7 @@ import React from 'react'
 import {Text, StyleSheet} from 'react-native'
 import colors from '../utils/colors'
 
-const DefaultText = ({children, bold, style, otherProps}) => (
+const DefaultText = ({children, bold, style, ...otherProps}) => (
   <Text
     style={[
       styles.text,
