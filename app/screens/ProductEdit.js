@@ -1,9 +1,16 @@
 import React from 'react'
-import {Image, StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 import * as Yup from 'yup'
 import Screen from '../components/Screen'
-import {Form, FormField, FormPicker, SubmitButton} from '../components/forms'
+import {
+  Form,
+  FormField,
+  FormPicker,
+  FormImagePicker,
+  SubmitButton,
+} from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
+import useLocation from '../hooks/useLocation'
 
 const styles = StyleSheet.create({
   logo: {
@@ -19,10 +26,18 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required().min(1).label('Judul'),
-  price: Yup.number().required().min(4).max(10000).label('Harga'),
+  title: Yup.string().required('Judul harus diisi.').min(1).label('Judul'),
+  price: Yup.number()
+    .required('Harga harus diisi.')
+    .min(4)
+    .max(10000)
+    .label('Harga'),
   description: Yup.string().label('Deskripsi'),
-  category: Yup.object().required().nullable().label('Kategori'),
+  category: Yup.object()
+    .required('Silahkan pilih kategori.')
+    .nullable()
+    .label('Kategori'),
+  images: Yup.array().min(1, 'Tambahkan minimal 1 gambar.').label('Gambar'),
 })
 
 const categories = [
@@ -83,6 +98,8 @@ const categories = [
 ]
 
 const ProductEdit = () => {
+  const location = useLocation()
+
   return (
     <Screen style={styles.container}>
       <Form
@@ -91,9 +108,11 @@ const ProductEdit = () => {
           price: '',
           description: '',
           category: null,
+          images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={() => console.log(location)}
         validationSchema={validationSchema}>
+        <FormImagePicker name="images" />
         <FormField name="title" maxLength={255} placeholder="Judul" />
         <FormField
           name="price"

@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
+
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import Screen from '../components/Screen'
 import Input from '../components/Input'
 import Picker from '../components/Picker'
+import Button from '../components/Button'
+import ImageInput from '../components/ImageInput'
+import ImageInputList from '../components/ImageInputList'
 
 const categories = [
   {label: 'Furniture', value: 1},
@@ -10,18 +15,20 @@ const categories = [
 ]
 
 const Test = () => {
-  const [category, setCategory] = useState(categories[0])
+  const [imageUris, setImageUris] = useState([])
+
+  const handleAdd = (uri) => setImageUris([...imageUris, uri])
+
+  const handleRemove = (uri) =>
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri))
 
   return (
     <Screen>
-      <Picker
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        icon="apps"
-        placeholder="Category"
-        items={categories}
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
       />
-      <Input icon="email" placeholder="Username" />
     </Screen>
   )
 }

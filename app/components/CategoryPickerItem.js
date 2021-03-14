@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 const CategoryPickerItem = ({item, onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Icon backgroundColor={item.backgroundColor} name={item.icon} size={80} />
       <DefaultText style={styles.label}>{item.label}</DefaultText>
     </TouchableOpacity>
