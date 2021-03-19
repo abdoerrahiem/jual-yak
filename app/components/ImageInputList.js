@@ -4,6 +4,10 @@ import ImageInput from './ImageInput'
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  images: {
     flexDirection: 'row',
   },
   image: {
@@ -15,7 +19,7 @@ const ImageInputList = ({imageUris = [], onRemoveImage, onAddImage}) => {
   const scrolllView = useRef()
 
   return (
-    <View>
+    <View style={styles.container}>
       <ScrollView
         ref={scrolllView}
         onContentSizeChange={() => scrolllView.current.scrollToEnd()}

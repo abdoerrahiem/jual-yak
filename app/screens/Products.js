@@ -3,6 +3,7 @@ import {StyleSheet, FlatList} from 'react-native'
 import Card from '../components/Card'
 import Screen from '../components/Screen'
 import colors from '../utils/colors'
+import routes from '../utils/routes'
 
 const initialProducts = [
   {
@@ -19,8 +20,10 @@ const initialProducts = [
   },
 ]
 
-const Products = () => {
+const Products = ({navigation}) => {
   const [products, setProducts] = useState(initialProducts)
+
+  const {navigate} = navigation
 
   return (
     <Screen style={styles.screen}>
@@ -28,7 +31,12 @@ const Products = () => {
         data={products}
         keyExtractor={(product) => product.id.toString()}
         renderItem={({item}) => (
-          <Card title={item.title} price={item.price} image={item.image} />
+          <Card
+            title={item.title}
+            price={item.price}
+            image={item.image}
+            onPress={() => navigate(routes.PRODUCT, {item})}
+          />
         )}
       />
     </Screen>
@@ -37,7 +45,7 @@ const Products = () => {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    paddingHorizontal: 20,
     backgroundColor: colors.light,
   },
 })

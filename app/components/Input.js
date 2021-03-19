@@ -5,7 +5,7 @@ import colors from '../utils/colors'
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     borderRadius: 50,
     flexDirection: 'row',
     width: '100%',

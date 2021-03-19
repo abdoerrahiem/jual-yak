@@ -12,7 +12,7 @@ import colors from '../utils/colors'
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
@@ -33,9 +33,9 @@ const ImageInput = ({uri, onChangeImage}) => {
         if (!data.didCancel) onChangeImage(data.uri)
       })
     } else {
-      Alert.alert('Delete', 'Are you sure to delete this image?', [
-        {text: 'Yes', onPress: () => onChangeImage(null)},
-        {text: 'No'},
+      Alert.alert('Hapus Gambar', 'Kamu yakin ingin menghapus gambar ini?', [
+        {text: 'Ya', onPress: () => onChangeImage(null)},
+        {text: 'Tidak'},
       ])
     }
   }

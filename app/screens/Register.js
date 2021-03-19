@@ -18,11 +18,12 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string().required().email().label('Name'),
   email: Yup.string().required().email().label('Email'),
   password: Yup.string().required().min(4).label('Password'),
 })
 
-const Login = ({navigation}) => {
+const Register = ({navigation}) => {
   const {navigate} = navigation
 
   return (
@@ -32,6 +33,12 @@ const Login = ({navigation}) => {
         initialValues={{email: '', password: ''}}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}>
+        <FormField
+          name="name"
+          autoCorrect={false}
+          icon="account"
+          placeholder="Nama"
+        />
         <FormField
           name="email"
           autoCapitalize="none"
@@ -50,10 +57,10 @@ const Login = ({navigation}) => {
           textContentType="password"
           secureTextEntry
         />
-        <SubmitButton title="Masuk" />
+        <SubmitButton title="Daftar" />
       </Form>
     </Screen>
   )
 }
 
-export default Login
+export default Register

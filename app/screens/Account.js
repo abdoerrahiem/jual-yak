@@ -13,13 +13,16 @@ const menuItems = [
     icon: {name: 'format-list-bulleted', backgroundColor: colors.tertiary},
   },
   {
-    id: 3,
+    id: 2,
     title: 'Pesan Masuk',
     icon: {name: 'email', backgroundColor: colors.secondary},
+    targetScreen: 'Messages',
   },
 ]
 
-const Account = () => {
+const Account = ({navigation}) => {
+  const {navigate} = navigation
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -42,6 +45,7 @@ const Account = () => {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigate(item.targetScreen)}
             />
           )}
           ItemSeparatorComponent={() => <ListItemSeparator />}
@@ -57,9 +61,11 @@ const Account = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginBottom: 20,
   },
-  screen: {},
+  screen: {
+    // backgroundColor: 'red',
+  },
 })
 
 export default Account
