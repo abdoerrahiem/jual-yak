@@ -24,7 +24,7 @@ const FormPicker = ({
         width={width}
         PickerItemComponent={PickerItemComponent}
       />
-      {touched[name] && <ErrorMessage error={errors[name]} />}
+      {touched[name] && errors[name] && <ErrorMessage error={errors[name]} />}
     </>
   )
 }

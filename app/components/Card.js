@@ -4,11 +4,11 @@ import DefaultText from './DefaultText'
 import colors from '../utils/colors'
 import convert from '../utils/convert'
 
-const Card = ({title, price, image, onPress}) => {
+const Card = ({title, price, uri, onPress}) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={image} />
+        <Image style={styles.image} source={{uri}} />
         <View style={styles.detailsContainer}>
           <DefaultText style={styles.title}>{title}</DefaultText>
           <DefaultText style={styles.price} bold>

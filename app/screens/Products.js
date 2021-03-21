@@ -1,32 +1,35 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import {StyleSheet, FlatList} from 'react-native'
+import {useDispatch, useSelector} from 'react-redux'
+
+import Button from '../components/Button'
 import Card from '../components/Card'
 import Screen from '../components/Screen'
+import DefaultText from '../components/DefaultText'
 import colors from '../utils/colors'
 import routes from '../utils/routes'
-
-const initialProducts = [
-  {
-    id: 1,
-    title: 'Red jacket for sale',
-    price: '100000',
-    image: require('../assets/img/jacket.jpg'),
-  },
-  {
-    id: 2,
-    title: 'Couch in great condition',
-    price: '200000',
-    image: require('../assets/img/chair.jpg'),
-  },
-]
+import {getProducts} from '../store/actions/productActions'
+import Loader from '../components/Loader'
 
 const Products = ({navigation}) => {
-  const [products, setProducts] = useState(initialProducts)
-
   const {navigate} = navigation
+
+  const dispatch = useDispatch()
+  const {loading, error, products} = useSelector((state) => state.products)
+
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [])
 
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <DefaultText>{error}</DefaultText>
+          <Button title="Coba Lagi" onPress={() => dispatch(getProducts())} />
+        </>
+      )}
+      {loading && <Loader />}
       <FlatList
         data={products}
         keyExtractor={(product) => product.id.toString()}
@@ -34,7 +37,7 @@ const Products = ({navigation}) => {
           <Card
             title={item.title}
             price={item.price}
-            image={item.image}
+            uri={item.images[0].url}
             onPress={() => navigate(routes.PRODUCT, {item})}
           />
         )}

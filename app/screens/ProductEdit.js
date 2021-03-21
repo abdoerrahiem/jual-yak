@@ -1,6 +1,8 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {Alert, StyleSheet} from 'react-native'
 import * as Yup from 'yup'
+import {useDispatch, useSelector} from 'react-redux'
+
 import Screen from '../components/Screen'
 import {
   Form,
@@ -11,6 +13,7 @@ import {
 } from '../components/forms'
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import useLocation from '../hooks/useLocation'
+import {createProduct} from '../store/actions/productActions'
 
 const styles = StyleSheet.create({
   logo: {
@@ -100,8 +103,20 @@ const categories = [
 const ProductEdit = () => {
   const location = useLocation()
 
+  const dispatch = useDispatch()
+
+  const {product, loading, error} = useSelector((state) => state.product)
+
+  const handleSubmit = (data) => {
+    console.log('hai')
+    dispatch(createProduct({...data, location}))
+    // alert('success')
+    console.log('hai')
+  }
+
   return (
     <Screen style={styles.container}>
+      {/* {product && alert('Success')} */}
       <Form
         initialValues={{
           title: '',
@@ -110,7 +125,7 @@ const ProductEdit = () => {
           category: null,
           images: [],
         }}
-        onSubmit={() => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}>
         <FormImagePicker name="images" />
         <FormField name="title" maxLength={255} placeholder="Judul" />

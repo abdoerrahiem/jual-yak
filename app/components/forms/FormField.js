@@ -14,7 +14,7 @@ const FormField = ({name, width, ...otherProps}) => {
         width={width}
         {...otherProps}
       />
-      {touched[name] && <ErrorMessage error={errors[name]} />}
+      {touched[name] && errors[name] && <ErrorMessage error={errors[name]} />}
     </>
   )
 }

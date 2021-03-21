@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   images: {
     flexDirection: 'row',
