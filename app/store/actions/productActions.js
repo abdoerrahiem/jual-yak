@@ -23,22 +23,24 @@ export const getProducts = () => async (dispatch) => {
   }
 }
 
-export const createProduct = ({
-  title,
-  price,
-  category,
-  description,
-  images,
-  location,
-}) => async (dispatch) => {
+export const createProduct = (
+  {title, price, category, description, images, location},
+  onUploadProgress,
+) => async (dispatch) => {
   try {
-    dispatch({type: types.CREATE_PRODUCTS_REQUEST})
+    dispatch({type: types.CREATE_PRODUCT_REQUEST})
+
+    const config = {
+      onUploadProgress: (progressEvent) =>
+        onUploadProgress(
+          Math.round((progressEvent.loaded * 100) / progressEvent.total),
+        ),
+    }
 
     const formData = new FormData()
     formData.append('title', title)
     formData.append('price', price)
     formData.append('categoryId', category.value)
-    formData.append('description', description)
     formData.append('description', description)
     images.forEach((image, index) =>
       formData.append('images', {
@@ -49,18 +51,18 @@ export const createProduct = ({
     )
     if (location) formData.append('location', JSON.stringify(location))
 
-    const {data} = await axios.post(`${api}/listings`, formData)
+    const {data} = await axios.post(`${api}/listings`, formData, config)
 
     console.log(data)
 
     dispatch({
-      type: types.CREATE_PRODUCTS_SUCCESS,
+      type: types.CREATE_PRODUCT_SUCCESS,
       payload: data,
     })
   } catch (error) {
     console.log(error)
     dispatch({
-      type: types.CREATE_PRODUCTS_FAIL,
+      type: types.CREATE_PRODUCT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

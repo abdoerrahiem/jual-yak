@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Alert, StyleSheet} from 'react-native'
 import * as Yup from 'yup'
 import {useDispatch, useSelector} from 'react-redux'
@@ -14,6 +14,8 @@ import {
 import CategoryPickerItem from '../components/CategoryPickerItem'
 import useLocation from '../hooks/useLocation'
 import {createProduct} from '../store/actions/productActions'
+import DefaultText from '../components/DefaultText'
+import Upload from '../components/Upload'
 
 const styles = StyleSheet.create({
   logo: {
@@ -101,22 +103,38 @@ const categories = [
 ]
 
 const ProductEdit = () => {
+  const [progress, setProgress] = useState(0)
+  const [showUpload, setShowUpload] = useState(0)
+
   const location = useLocation()
 
   const dispatch = useDispatch()
 
   const {product, loading, error} = useSelector((state) => state.product)
 
-  const handleSubmit = (data) => {
-    console.log('hai')
-    dispatch(createProduct({...data, location}))
-    // alert('success')
-    console.log('hai')
+  useEffect(() => {
+    if (error) {
+      setShowUpload(false)
+    }
+  }, [error])
+
+  const handleSubmit = (data, {resetForm}) => {
+    setProgress(0)
+    setShowUpload(true)
+
+    dispatch(
+      createProduct({...data, location}, (progress) => setProgress(progress)),
+    )
+
+    resetForm()
   }
 
   return (
     <Screen style={styles.container}>
-      {/* {product && alert('Success')} */}
+      {showUpload && (
+        <Upload progress={progress} onDone={() => setShowUpload(false)} />
+      )}
+      {error && <DefaultText>{error}</DefaultText>}
       <Form
         initialValues={{
           title: '',
@@ -158,3 +176,5 @@ const ProductEdit = () => {
 }
 
 export default ProductEdit
+
+//video 14 belum

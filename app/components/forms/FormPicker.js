@@ -16,8 +16,8 @@ const FormPicker = ({
   return (
     <>
       <Picker
-        numberOfColumns={numberOfColumns}
         items={items}
+        numberOfColumns={numberOfColumns}
         onSelectItem={(item) => setFieldValue(name, item)}
         placeholder={placeholder}
         selectedItem={values[name]}

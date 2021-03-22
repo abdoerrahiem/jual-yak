@@ -28,16 +28,16 @@ export const createProduct = (state = {}, action) => {
   const {type, payload} = action
 
   switch (type) {
-    case types.CREATE_PRODUCTS_REQUEST:
+    case types.CREATE_PRODUCT_REQUEST:
       return {
         loading: true,
       }
-    case types.CREATE_PRODUCTS_SUCCESS:
+    case types.CREATE_PRODUCT_SUCCESS:
       return {
         loading: false,
         product: payload,
       }
-    case types.CREATE_PRODUCTS_FAIL:
+    case types.CREATE_PRODUCT_FAIL:
       return {
         loading: false,
         error: payload,
