@@ -7,11 +7,13 @@ import AuthNavigator from './navigations/AuthNavigator'
 import AppNavigator from './navigations/AppNavigator'
 import store from './store'
 import theme from './utils/theme'
+import Offline from './components/Offline'
 
 const App = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
+      <Offline />
       <Provider store={store}>
         <NavigationContainer theme={theme}>
           <AppNavigator />

@@ -1,14 +1,18 @@
 import React from 'react'
-import {View, Image, StyleSheet, TouchableHighlight} from 'react-native'
+import {View, StyleSheet, TouchableHighlight, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Image from 'react-native-fast-image'
 
 import colors from '../utils/colors'
+import routes from '../utils/routes'
+
+const {height, width} = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
   image: {
-    width: '100%',
-    height: '100%',
-    top: -20,
+    width,
+    height: 250,
+    top: height / 6,
   },
   container: {
     backgroundColor: colors.black,
@@ -32,8 +36,9 @@ const styles = StyleSheet.create({
   },
 })
 
-const ImageView = ({navigation}) => {
-  const {goBack} = navigation
+const ImageView = ({navigation, route}) => {
+  const {navigate} = navigation
+  const {uri} = route.params
 
   return (
     <View style={styles.container}>
@@ -41,7 +46,7 @@ const ImageView = ({navigation}) => {
         <TouchableHighlight
           underlayColor={colors.dark}
           style={styles.closeIcon}
-          onPress={() => goBack()}>
+          onPress={() => navigate(routes.PRODUCT)}>
           <Icon name="close" color="white" size={30} />
         </TouchableHighlight>
         <TouchableHighlight
@@ -53,8 +58,11 @@ const ImageView = ({navigation}) => {
       </View>
       <Image
         style={styles.image}
-        source={require('../assets/img/chair.jpg')}
-        resizeMode="contain"
+        tintColor="light"
+        source={{
+          uri,
+          priority: Image.priority.normal,
+        }}
       />
     </View>
   )

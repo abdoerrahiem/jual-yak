@@ -8,11 +8,17 @@ import ImageView from '../screens/ImageView'
 const Stack = createStackNavigator()
 
 const FeedNavigator = () => (
-  <Stack.Navigator
-    mode="modal"
-    screenOptions={{headerShown: false, gestureEnabled: true}}>
-    <Stack.Screen name="Products" component={Products} />
-    <Stack.Screen name="Product" component={Product} />
+  <Stack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+    <Stack.Screen
+      name="Products"
+      component={Products}
+      options={{gestureEnabled: true}}
+    />
+    <Stack.Screen
+      name="Product"
+      component={Product}
+      options={{gestureEnabled: true}}
+    />
     <Stack.Screen name="ImageView" component={ImageView} />
   </Stack.Navigator>
 )

@@ -1,5 +1,7 @@
 import React from 'react'
-import {View, TouchableWithoutFeedback, StyleSheet, Image} from 'react-native'
+import {View, TouchableWithoutFeedback, StyleSheet} from 'react-native'
+import Image from 'react-native-fast-image'
+
 import DefaultText from './DefaultText'
 import colors from '../utils/colors'
 import convert from '../utils/convert'
@@ -8,7 +10,14 @@ const Card = ({title, price, uri, onPress}) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>
-        <Image style={styles.image} source={{uri}} />
+        <Image
+          style={styles.image}
+          tintColor="light"
+          source={{
+            uri,
+            priority: Image.priority.normal,
+          }}
+        />
         <View style={styles.detailsContainer}>
           <DefaultText style={styles.title}>{title}</DefaultText>
           <DefaultText style={styles.price} bold>

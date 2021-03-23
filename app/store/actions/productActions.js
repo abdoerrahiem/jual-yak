@@ -1,17 +1,29 @@
 import api from '../../utils/api'
 import axios from 'axios'
 import * as types from '../types/productTypes'
+import {createStorage, getStorage} from '../../utils/storage'
 
 export const getProducts = () => async (dispatch) => {
   try {
     dispatch({type: types.GET_PRODUCTS_REQUEST})
 
-    const {data} = await axios.get(`${api}/listings`)
+    const products = await getStorage('products')
 
-    dispatch({
-      type: types.GET_PRODUCTS_SUCCESS,
-      payload: data,
-    })
+    if (products) {
+      dispatch({
+        type: types.GET_PRODUCTS_SUCCESS,
+        payload: products,
+      })
+    } else {
+      const {data} = await axios.get(`${api}/listings`)
+
+      createStorage('products', data)
+
+      dispatch({
+        type: types.GET_PRODUCTS_SUCCESS,
+        payload: data,
+      })
+    }
   } catch (error) {
     dispatch({
       type: types.GET_PRODUCTS_FAIL,

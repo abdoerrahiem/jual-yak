@@ -1,5 +1,7 @@
 import React from 'react'
-import {View, Image, StyleSheet, TouchableHighlight} from 'react-native'
+import {View, StyleSheet, TouchableHighlight} from 'react-native'
+import Image from 'react-native-fast-image'
+
 import DefaultText from '../components/DefaultText'
 import ListItem from '../components/ListItem'
 import colors from '../utils/colors'
@@ -35,8 +37,15 @@ const Product = ({route, navigation}) => {
     <>
       <TouchableHighlight
         underlayColor={colors.light}
-        onPress={() => navigate(routes.IMAGE_VIEW)}>
-        <Image style={styles.image} source={item.image} />
+        onPress={() => navigate(routes.IMAGE_VIEW, {uri: item.images[0].url})}>
+        <Image
+          style={styles.image}
+          tintColor="light"
+          source={{
+            uri: item.images[0].url,
+            priority: Image.priority.normal,
+          }}
+        />
       </TouchableHighlight>
       <View style={styles.detailsContainer}>
         <DefaultText style={styles.title}>{item.title}</DefaultText>

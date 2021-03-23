@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Alert, StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 import * as Yup from 'yup'
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -104,7 +104,7 @@ const categories = [
 
 const ProductEdit = () => {
   const [progress, setProgress] = useState(0)
-  const [showUpload, setShowUpload] = useState(0)
+  // const [showUpload, setShowUpload] = useState(false)
 
   const location = useLocation()
 
@@ -112,15 +112,15 @@ const ProductEdit = () => {
 
   const {product, loading, error} = useSelector((state) => state.product)
 
-  useEffect(() => {
-    if (error) {
-      setShowUpload(false)
-    }
-  }, [error])
+  // useEffect(() => {
+  //   if (error) {
+  //     setShowUpload(false)
+  //   }
+  // }, [error])
 
   const handleSubmit = (data, {resetForm}) => {
     setProgress(0)
-    setShowUpload(true)
+    // setShowUpload(true)
 
     dispatch(
       createProduct({...data, location}, (progress) => setProgress(progress)),
@@ -131,9 +131,10 @@ const ProductEdit = () => {
 
   return (
     <Screen style={styles.container}>
-      {showUpload && (
+      {/* {showUpload && (
         <Upload progress={progress} onDone={() => setShowUpload(false)} />
-      )}
+      )} */}
+      {loading && <Upload progress={progress} />}
       {error && <DefaultText>{error}</DefaultText>}
       <Form
         initialValues={{

@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.tertiary,
-    marginTop: 5,
   },
   animation: {
     width: 150,
@@ -34,13 +33,18 @@ const Upload = ({progress = 0, onDone}) => {
             <DefaultText style={styles.text}>{progress}%</DefaultText>
           </>
         ) : (
-          <LottieView
-            source={require('../assets/animations/done.json')}
-            autoPlay
-            loop={false}
-            style={styles.animation}
-            onAnimationFinish={onDone}
-          />
+          <>
+            <LottieView
+              source={require('../assets/animations/done.json')}
+              autoPlay
+              loop={false}
+              style={styles.animation}
+              // onAnimationFinish={onDone}
+            />
+            <DefaultText style={styles.text}>
+              Post berhasil ditambahkan
+            </DefaultText>
+          </>
         )}
       </View>
     </Modal>
