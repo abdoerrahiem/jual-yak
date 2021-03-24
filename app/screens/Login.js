@@ -1,8 +1,11 @@
 import React from 'react'
 import {Image, StyleSheet} from 'react-native'
 import * as Yup from 'yup'
+import {useSelector, useDispatch} from 'react-redux'
+
 import Screen from '../components/Screen'
-import {Form, FormField, SubmitButton} from '../components/forms'
+import {ErrorMessage, Form, FormField, SubmitButton} from '../components/forms'
+import {login} from '../store/actions/authActions'
 
 const styles = StyleSheet.create({
   logo: {
@@ -22,15 +25,21 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label('Password'),
 })
 
-const Login = ({navigation}) => {
-  const {navigate} = navigation
+const Login = () => {
+  const dispatch = useDispatch()
+  const {loading, error} = useSelector((state) => state.auth)
+
+  const handleSubmit = ({email, password}) => {
+    dispatch(login(email, password))
+  }
 
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require('../assets/img/logo.png')} />
+      {error && <ErrorMessage error={error} />}
       <Form
         initialValues={{email: '', password: ''}}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}>
         <FormField
           name="email"
@@ -50,10 +59,15 @@ const Login = ({navigation}) => {
           textContentType="password"
           secureTextEntry
         />
-        <SubmitButton title="Masuk" />
+        <SubmitButton
+          disabled={loading}
+          title={loading ? 'Loading...' : 'Masuk'}
+        />
       </Form>
     </Screen>
   )
 }
 
 export default Login
+
+// video 7

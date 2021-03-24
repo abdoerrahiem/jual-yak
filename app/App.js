@@ -10,13 +10,17 @@ import theme from './utils/theme'
 import Offline from './components/Offline'
 
 const App = () => {
+  const {
+    auth: {user},
+  } = store.getState()
+
   return (
     <>
       <StatusBar barStyle="light-content" />
       <Offline />
       <Provider store={store}>
         <NavigationContainer theme={theme}>
-          <AppNavigator />
+          {user ? <AppNavigator /> : <AuthNavigator />}
         </NavigationContainer>
       </Provider>
     </>

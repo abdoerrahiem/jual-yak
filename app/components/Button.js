@@ -3,14 +3,15 @@ import {TouchableOpacity, StyleSheet} from 'react-native'
 import colors from '../utils/colors'
 import DefaultText from './DefaultText'
 
-const Button = ({title, secondary, onPress}) => {
+const Button = ({title, secondary, onPress, ...otherProps}) => {
   return (
     <TouchableOpacity
       style={[
         styles.button,
         {backgroundColor: secondary ? colors.secondary : colors.primary},
       ]}
-      onPress={onPress}>
+      onPress={onPress}
+      {...otherProps}>
       <DefaultText style={styles.text}>{title}</DefaultText>
     </TouchableOpacity>
   )

@@ -1,5 +1,4 @@
 import * as types from '../types/productTypes'
-import {createStorage} from '../../utils/storage'
 
 export const getProducts = (state = {products: []}, action) => {
   const {type, payload} = action
