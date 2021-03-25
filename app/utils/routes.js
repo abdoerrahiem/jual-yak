@@ -8,6 +8,7 @@ const routes = Object.freeze({
   PRODUCT_EDIT: 'ProductEdit',
   REGISTER: 'Register',
   WELCOME: 'Welcome',
+  MY_PRODUCTS: 'MyProducts',
 })
 
 export default routes

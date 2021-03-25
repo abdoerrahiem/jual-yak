@@ -1,4 +1,9 @@
 {
   "name": "ReactNativeApp",
-  "displayName": "ReactNativeApp"
+  "displayName": "ReactNativeApp",
+  "expo": {
+    "android": {
+      "useNextNotificationsApi": true
+    }
+  }
 }

@@ -24,6 +24,30 @@ export const getProducts = (state = {products: []}, action) => {
   }
 }
 
+export const getCurrentUserProduct = (state = {products: []}, action) => {
+  const {type, payload} = action
+
+  switch (type) {
+    case types.GET_CURRENT_USER_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        products: [],
+      }
+    case types.GET_CURRENT_USER_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        products: payload,
+      }
+    case types.GET_CURRENT_USER_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: payload,
+      }
+    default:
+      return state
+  }
+}
+
 export const createProduct = (state = {}, action) => {
   const {type, payload} = action
 

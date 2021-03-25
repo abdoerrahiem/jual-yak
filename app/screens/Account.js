@@ -1,16 +1,20 @@
 import React from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
+import {useSelector, useDispatch} from 'react-redux'
+
 import Icon from '../components/Icon'
 import ListItem from '../components/ListItem'
 import ListItemSeparator from '../components/ListItemSeparator'
 import Screen from '../components/Screen'
 import colors from '../utils/colors'
+import {logout} from '../store/actions/authActions'
 
 const menuItems = [
   {
     id: 1,
     title: 'List Produk',
     icon: {name: 'format-list-bulleted', backgroundColor: colors.tertiary},
+    targetScreen: 'MyProducts',
   },
   {
     id: 2,
@@ -23,12 +27,15 @@ const menuItems = [
 const Account = ({navigation}) => {
   const {navigate} = navigation
 
+  const dispatch = useDispatch()
+  const {user} = useSelector((state) => state.currentUser)
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Abdur Rahim"
-          subtitle="abdoerrahiem@gmail.com"
+          title={user.name}
+          subtitle={user.email}
           image={require('../assets/img/abdoerrahiem.jpg')}
         />
       </View>
@@ -54,6 +61,7 @@ const Account = ({navigation}) => {
       <ListItem
         title="Keluar"
         IconComponent={<Icon name="logout" backgroundColor={colors.primary} />}
+        onPress={() => dispatch(logout())}
       />
     </Screen>
   )

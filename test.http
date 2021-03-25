@@ -5,3 +5,8 @@ Content-Type: application/json
     "email": "mosh@domain.com",
     "password": "12345e"
 }
+
+
+####
+GET http://localhost:5000/api/my/listings
+x-auth-token: 

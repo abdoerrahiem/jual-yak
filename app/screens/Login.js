@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import {useSelector, useDispatch} from 'react-redux'
 
 import Screen from '../components/Screen'
+import Loader from '../components/Loader'
 import {ErrorMessage, Form, FormField, SubmitButton} from '../components/forms'
 import {login} from '../store/actions/authActions'
 
@@ -27,47 +28,48 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const dispatch = useDispatch()
-  const {loading, error} = useSelector((state) => state.auth)
+  const {loading, error} = useSelector((state) => state.login)
 
   const handleSubmit = ({email, password}) => {
     dispatch(login(email, password))
   }
 
   return (
-    <Screen style={styles.container}>
-      <Image style={styles.logo} source={require('../assets/img/logo.png')} />
-      {error && <ErrorMessage error={error} />}
-      <Form
-        initialValues={{email: '', password: ''}}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}>
-        <FormField
-          name="email"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <FormField
-          name="password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry
-        />
-        <SubmitButton
-          disabled={loading}
-          title={loading ? 'Loading...' : 'Masuk'}
-        />
-      </Form>
-    </Screen>
+    <>
+      {loading && <Loader />}
+      <Screen style={styles.container}>
+        <Image style={styles.logo} source={require('../assets/img/logo.png')} />
+        {error && <ErrorMessage error={error} />}
+        <Form
+          initialValues={{email: '', password: ''}}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}>
+          <FormField
+            name="email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            placeholder="Email"
+            textContentType="emailAddress"
+          />
+          <FormField
+            name="password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            placeholder="Password"
+            textContentType="password"
+            secureTextEntry
+          />
+          <SubmitButton
+            disabled={loading}
+            title={loading ? 'Loading...' : 'Masuk'}
+          />
+        </Form>
+      </Screen>
+    </>
   )
 }
 
 export default Login
-
-// video 7

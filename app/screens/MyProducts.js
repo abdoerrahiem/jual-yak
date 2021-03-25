@@ -9,16 +9,23 @@ import DefaultText from '../components/DefaultText'
 import colors from '../utils/colors'
 import routes from '../utils/routes'
 import Loader from '../components/Loader'
-import {getProducts} from '../store/actions/productActions'
+import {getCurrentUserProducts} from '../store/actions/productActions'
 
-const Products = ({navigation}) => {
+const styles = StyleSheet.create({
+  screen: {
+    paddingHorizontal: 20,
+    backgroundColor: colors.light,
+  },
+})
+
+const MyProducts = ({navigation}) => {
   const {navigate} = navigation
 
   const dispatch = useDispatch()
-  const {loading, error, products} = useSelector((state) => state.products)
+  const {loading, error, products} = useSelector((state) => state.myProducts)
 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getCurrentUserProducts())
   }, [])
 
   return (
@@ -46,11 +53,4 @@ const Products = ({navigation}) => {
   )
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    paddingHorizontal: 20,
-    backgroundColor: colors.light,
-  },
-})
-
-export default Products
+export default MyProducts

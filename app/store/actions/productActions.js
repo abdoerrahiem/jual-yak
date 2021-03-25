@@ -28,7 +28,38 @@ export const getProducts = () => async (dispatch) => {
     dispatch({
       type: types.GET_PRODUCTS_FAIL,
       payload:
-        error.response && error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const getCurrentUserProducts = () => async (dispatch) => {
+  try {
+    dispatch({type: types.GET_CURRENT_USER_PRODUCT_REQUEST})
+
+    const token = await getStorage('token')
+
+    const {data} = await axios.get(`${api}/my/listings`, {
+      headers: {
+        'x-auth-token': token,
+      },
+    })
+
+    dispatch({
+      type: types.GET_CURRENT_USER_PRODUCT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: types.GET_CURRENT_USER_PRODUCT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     })
@@ -76,7 +107,9 @@ export const createProduct = (
     dispatch({
       type: types.CREATE_PRODUCT_FAIL,
       payload:
-        error.response && error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     })

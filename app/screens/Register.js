@@ -1,8 +1,12 @@
 import React from 'react'
 import {Image, StyleSheet} from 'react-native'
 import * as Yup from 'yup'
+import {useSelector, useDispatch} from 'react-redux'
+
 import Screen from '../components/Screen'
-import {Form, FormField, SubmitButton} from '../components/forms'
+import Loader from '../components/Loader'
+import {Form, FormField, SubmitButton, ErrorMessage} from '../components/forms'
+import {register} from '../store/actions/userActions'
 
 const styles = StyleSheet.create({
   logo: {
@@ -18,48 +22,60 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().email().label('Name'),
+  name: Yup.string().required().label('Name'),
   email: Yup.string().required().email().label('Email'),
   password: Yup.string().required().min(4).label('Password'),
 })
 
-const Register = ({navigation}) => {
-  const {navigate} = navigation
+const Register = () => {
+  const dispatch = useDispatch()
+  const {loading, error} = useSelector((state) => state.register)
+
+  const handleSubmit = ({name, email, password}) => {
+    dispatch(register(name, email, password))
+  }
 
   return (
-    <Screen style={styles.container}>
-      <Image style={styles.logo} source={require('../assets/img/logo.png')} />
-      <Form
-        initialValues={{email: '', password: ''}}
-        onSubmit={(values) => console.log(values)}
-        validationSchema={validationSchema}>
-        <FormField
-          name="name"
-          autoCorrect={false}
-          icon="account"
-          placeholder="Nama"
-        />
-        <FormField
-          name="email"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <FormField
-          name="password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry
-        />
-        <SubmitButton title="Daftar" />
-      </Form>
-    </Screen>
+    <>
+      {loading && <Loader />}
+      <Screen style={styles.container}>
+        <Image style={styles.logo} source={require('../assets/img/logo.png')} />
+        {error && <ErrorMessage error={error} />}
+        <Form
+          initialValues={{name: '', email: '', password: ''}}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}>
+          <FormField
+            name="name"
+            autoCorrect={false}
+            icon="account"
+            placeholder="Nama"
+          />
+          <FormField
+            name="email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            placeholder="Email"
+            textContentType="emailAddress"
+          />
+          <FormField
+            name="password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            placeholder="Password"
+            textContentType="password"
+            secureTextEntry
+          />
+          <SubmitButton
+            disabled={loading}
+            title={loading ? 'Loading...' : 'Daftar'}
+          />
+        </Form>
+      </Screen>
+    </>
   )
 }
 

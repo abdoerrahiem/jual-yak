@@ -37,3 +37,11 @@ export const getStorage = async (key) => {
     console.log(error)
   }
 }
+
+export const removeStorage = async (key) => {
+  try {
+    await AsyncStorage.removeItem(key)
+  } catch (error) {
+    console.log(error)
+  }
+}

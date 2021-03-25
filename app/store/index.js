@@ -1,13 +1,21 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
-import {createProduct, getProducts} from './reducers/productReducers'
-import {login} from './reducers/authReducers'
+import {
+  createProduct,
+  getProducts,
+  getCurrentUserProduct,
+} from './reducers/productReducers'
+import {login, getCurrentUser} from './reducers/authReducers'
+import {register} from './reducers/userReducers'
 
 const rootReducers = combineReducers({
   products: getProducts,
+  myProducts: getCurrentUserProduct,
   product: createProduct,
-  auth: login,
+  login,
+  register,
+  currentUser: getCurrentUser,
 })
 
 const initialState = {}

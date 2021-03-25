@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "442496064311",
+    "firebase_url": "https://firegram-87189.firebaseio.com",
+    "project_id": "firegram-87189",
+    "storage_bucket": "firegram-87189.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442496064311:android:b097a7b3401754fad118b2",
+        "android_client_info": {
+          "package_name": "com.reactnativeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442496064311-e783t46fuq2132dvpt74u2kf4q457soh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4gXNSocrwanwGL3iH0KOhOKcVCz09kHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442496064311-e783t46fuq2132dvpt74u2kf4q457soh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
